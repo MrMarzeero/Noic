@@ -1,4 +1,4 @@
-//NOIC - Tutorial - Otávio Pinheiro
+//NOIC - Tutorial
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,7 +14,7 @@ void solve() {
 
     //binary search encontra maior x <= b tal que:
     // a + (a + 1) + ... + x < l
-        int lo = a, hi = b, res = 1;
+        int lo = a, hi = b - 1, res = 1;
     while(lo <= hi) {
         int mid = (lo + hi) / 2;
         if(sum(a, mid) < l) {
@@ -23,7 +23,6 @@ void solve() {
         } else hi = mid - 1;
     }
 
-    if(res > b - a + 1) res--;
     cout << res << '\n';
 }
 

@@ -1,4 +1,4 @@
-//NOIC - Tutorial
+//NOIC - Tutorial - Otávio Pinheiro
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -12,8 +12,8 @@ int main() {
       //se o peso do produto atual não pode na sacola, pegamos outra e colocamos esse produto
         if(peso + atual > S) {
             cnt++;
-            curSum = atual;
-        } else curSum += atual;
+            peso = atual;
+        } else peso += atual;
     }   
 
     cout << cnt << '\n';

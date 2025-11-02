@@ -13,16 +13,20 @@ char g[maxn][maxn];
 int comp[maxn][maxn]; 
 int green[maxcomp], yellow[maxcomp];
 
-int dX[] = {0, 1, 0, -1};
-int dY[] = {1, 0, -1, 0};
+int dX[] = {0, 0, 1, -1};
+int dY[] = {1, -1, 0, 0};
 
 void dfs(int x, int y) {
     comp[x][y] = act;
+    if (y == m || g[x][y+1] != '#') green[act]++;
+    if (x == n || g[x+1][y] != '#') yellow[act]++;
     for (int i = 0; i < 4; i++) {
         int pX = x + dX[i], pY = y + dY[i];
-        if(pX >= 1 && pX <= n && pY >= 1 && pY <= m)
-            if(!comp[pX][pY] && g[pX][pY] == '#')
+        if(pX >= 1 && pX <= n && pY >= 1 && pY <= m) {
+            if(!comp[pX][pY] && g[pX][pY] == '#') {
                 dfs(pX, pY);
+            }
+        }
     }
 }
 
@@ -34,7 +38,6 @@ int32_t main() {
             cin >> g[i][j];
 
     //pinta os componentes do grafo
-    int res = 0;
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) { 
             if(!comp[i][j] && g[i][j] == '#') { 
@@ -44,27 +47,11 @@ int32_t main() {
         }
     }
 
-    //calcula qtd de fitas se pintar componente de verde
-    for (int i = 1; i <= n + 1; i++) {
-        int last = 0;
-        for (int j = 1; j <= m + 1; j++) {
-            if(g[i][j] != '#') green[last]++;
-            last = comp[i][j];
-        }
-    }
-
-    //qtd de fitas se pintar componente de amarelo
-    for (int i = 1; i <= m + 1; i++) {
-        int last = 0;
-        for (int j = 1; j <= n + 1; j++) {
-            if(g[j][i] != '#') yellow[last]++;
-            last = comp[j][i];
-        }
-    }
-
     //para cada componente, calcula se pinta de verde ou de amarelo
+    int res = 0;
     for (int i = 1; i < act; i++)
         res += min(green[i], yellow[i]);
+
     cout << res << '\n';
     return 0;
 }
